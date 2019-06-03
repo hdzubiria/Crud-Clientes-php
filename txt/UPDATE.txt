@@ -1,0 +1,66 @@
+-- en Database
+
+		public function single_record($id){
+			$sql = "SELECT * FROM clientes where id='$id'";
+			$res = mysqli_query($this->con, $sql);
+			$return = mysqli_fetch_object($res );
+			return $return ;
+		}
+
+		public function update($nombres,$apellidos,$telefono,$direccion,$correo_electronico, $id){
+			$sql = "UPDATE clientes SET nombres='$nombres', apellidos='$apellidos', telefono='$telefono', direccion='$direccion', correo_electronico='$correo_electronico' WHERE id=$id";
+			$res = mysqli_query($this->con, $sql);
+			if($res){
+				return true;
+			}else{
+				return false;
+			}
+		}
+
+
+--- Al inicio despues de PHP
+
+	if (isset($_GET['id'])){
+		$id=intval($_GET['id']);
+	} else {
+		header("location:index.php");
+	}
+	
+
+
+--- despues del Título
+
+	include ("database.php");
+	$clientes= new Database();
+	
+	if(isset($_POST) && !empty($_POST)){
+		$nombres = $clientes->sanitize($_POST['nombres']);
+		$apellidos = $clientes->sanitize($_POST['apellidos']);
+		$telefono = $clientes->sanitize($_POST['telefono']);
+		$direccion = $clientes->sanitize($_POST['direccion']);
+		$correo_electronico = $clientes->sanitize($_POST['correo_electronico']);
+		$id_cliente=intval($_POST['id_cliente']);
+		$res = $clientes->update($nombres, $apellidos, $telefono, $direccion, $correo_electronico,$id_cliente);
+		if($res){
+			$message= "Datos actualizados con éxito";
+			$class="alert alert-success";
+			
+		}else{
+			$message="No se pudieron actualizar los datos";
+			$class="alert alert-danger";
+		}
+		
+		?>
+	<div class="<?php echo $class?>">
+	  <?php echo $message;?>
+	</div>	
+		<?php
+	}
+	$datos_cliente=$clientes->single_record($id);
+	
+
+
+-- en los Input
+		value="<?php echo $datos_cliente->nombres;?>	
+	 y adicionar
+		<input type="hidden" name="id_cliente" id="id_cliente" class='form-control' maxlength="100"   value="<?php echo $datos_cliente->id;?>">

@@ -1,0 +1,98 @@
+INDEX
+=====
+ - mysqli_connect($this->dbhost, $this->dbuser, $this->dbpass, $this->dbname)
+ - mysqli_connect_error()
+ - mysqli_query($this->con, $sql)
+ - $row=mysqli_fetch_object($listado)
+
+
+
+
+
+
+
+<?php
+	class Database{
+		private $con;
+		private $dbhost="localhost";
+		private $dbuser="root";
+		private $dbpass="";
+		private $dbname="crud_basico";
+		
+		function __construct(){
+			$this->connect_db();
+		}
+		public function connect_db(){
+			$this->con = mysqli_connect($this->dbhost, $this->dbuser, $this->dbpass, $this->dbname);
+			if(mysqli_connect_error()){
+				die("Conexión a la base de datos falló " . mysqli_connect_error() . mysqli_connect_errno());
+			}
+		}
+	}
+	
+?>	
+
+
+		public function read(){
+			$sql = "SELECT * FROM clientes";
+			$res = mysqli_query($this->con, $sql);
+			return $res;
+		}
+
+
+
+
+		<?php 
+			include('database.php');
+			$clientes = new Database();
+			$listado=$clientes->read();
+		?>
+
+		<tbody>
+
+
+		<?php 
+				while ($row=mysqli_fetch_object($listado)){
+					$id=$row->id;
+					$nombres=$row->nombres." ".$row->apellidos;
+					$telefono=$row->telefono;
+					$direccion=$row->direccion;
+					$email=$row->correo_electronico;
+		?>
+				
+						
+					<?php echo $nombres;?>
+
+			
+		<?php
+			}
+		?>
+
+
+		
+		href="update.php?id=<?php echo $id;?>"
+		href="delete.php?id=<?php echo $id;?>"
+
+
+
+
+
+
+
+        public function adicionarTotalaTabla() 
+        {
+            $sql = "SELECT count(*) as Registros FROM clientes";
+            $data = mysqli_query($this->conn,$sql);
+            $row = mysqli_fetch_object($data);
+            if($row)
+                $cantidad = $row->Registros;
+
+            $sHtml = "<tr><th colspan='5'>".$cantidad." Registros</th></tr>";
+            return $sHtml; 
+        }
+
+		<?php
+            echo $clientes->adicionarTotalaTabla();
+        ?>
+
+
