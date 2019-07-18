@@ -1,11 +1,21 @@
 <?php
     class Database 
     {
+        // private $conn;
+        // private $dbhost="localhost";
+        // private $user="root";
+        // private $password="";
+        // private $database="facturacion";
+
+        //:3306
+
         private $conn;
-        private $dbhost="localhost";
-        private $user="root";
-        private $password="";
-        private $database="facturacion";
+        private $dbhost="remotemysql.com";
+        private $user="dhtVYfspZy";
+        private $password="my4EkfYVQX";
+        private $database="dhtVYfspZy";
+
+
 
         function __construct() {
             $this->connect_db();
@@ -21,14 +31,14 @@
 
         public function read() 
         {
-            $sql = "SELECT * FROM clientes";
+            $sql = "SELECT * FROM Clientes";
             $data = mysqli_query($this->conn,$sql);
             return $data;
         }
 
         public function create($nombres,$apellidos,$telefono,$direccion,$correo_electronico)
         {
-            $sql = "INSERT INTO clientes(nombres,apellidos,telefono,direccion,correo) ";
+            $sql = "INSERT INTO Clientes(nombres,apellidos,telefono,direccion,correo) ";
             $sql = $sql."VALUES ('$nombres','$apellidos','$telefono','$direccion','$correo_electronico')";
             $res = mysqli_query($this->conn,$sql);
             if ($res) {
@@ -40,14 +50,14 @@
 
 
         public function read_singlerecord($id) {
-            $sql = "SELECT * FROM clientes where id='$id'";
+            $sql = "SELECT * FROM Clientes where id='$id'";
             $data = mysqli_query($this->conn,$sql);
             $record = mysqli_fetch_object($data);
             return $record;
         }
 
         public function update($nombres,$apellidos,$telefono,$direccion,$correo_electronico,$id) {
-            $sql = "UPDATE clientes SET nombres='$nombres',apellidos='$apellidos',telefono='$telefono',direccion='$direccion',correo='$correo_electronico' ";
+            $sql = "UPDATE Clientes SET nombres='$nombres',apellidos='$apellidos',telefono='$telefono',direccion='$direccion',correo='$correo_electronico' ";
             $sql =$sql." WHERE id=$id";
             $res = mysqli_query($this->conn,$sql);
             if ($res) {
@@ -58,7 +68,7 @@
         }
 
         public function delete($id) {
-            $sql = "DELETE FROM clientes where id='$id'";
+            $sql = "DELETE FROM Clientes where id='$id'";
             $res = mysqli_query($this->conn,$sql);
             if ($res) {
                 return true;
