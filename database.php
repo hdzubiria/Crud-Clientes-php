@@ -35,8 +35,7 @@
             $data = mysqli_query($this->conn,$sql);
 
             $rowcount=mysqli_num_rows($data);
-            printf("Result set has %d rows.\n",$rowcount);
-
+            echo($rowcount);
             return $data;
         }
 
