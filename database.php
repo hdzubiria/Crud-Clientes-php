@@ -33,9 +33,6 @@
         {
             $sql = "SELECT * FROM Clientes";
             $data = mysqli_query($this->conn,$sql);
-            if(!$data) {
-                echo("No hay Regsitros");
-            }
             return $data;
         }
 
