@@ -33,10 +33,6 @@
         {
             $sql = "SELECT * FROM Clientes";
             $data = mysqli_query($this->conn,$sql);
-
-            $rowcount=mysqli_num_rows($data);
-            echo($rowcount);
-            echo("hola");
             return $data;
         }
 

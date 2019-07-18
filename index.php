@@ -22,7 +22,7 @@
 
             <?php
                 include('database.php');
-                $clientes=new Database();
+                $clientes= new Database();
                 $listado=$clientes->read(); 
             ?>
 
