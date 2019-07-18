@@ -25,7 +25,6 @@
         {
             $this->conn = mysqli_connect($this->dbhost,$this->user,$this->password,$this->database);
             if (mysqli_connect_error()) {
-                echo('nada de conexion a la base de datos');
                 die("Fallo la conexion a la bas de datos".mysqli_connect_error().mysqli_connect_errorno());
             }
         }
@@ -34,6 +33,9 @@
         {
             $sql = "SELECT * FROM Clientes";
             $data = mysqli_query($this->conn,$sql);
+            if(!$data) {
+                echo("No hay Regsitros");
+            }
             return $data;
         }
 
