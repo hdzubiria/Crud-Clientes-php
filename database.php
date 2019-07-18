@@ -36,6 +36,7 @@
 
             $rowcount=mysqli_num_rows($data);
             echo($rowcount);
+            echo("hola");
             return $data;
         }
 
