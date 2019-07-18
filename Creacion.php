@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Adicinar Cliente</title>
+    <title>Adicionar Cliente</title>
 </head>
 
 <body>
