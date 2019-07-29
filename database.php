@@ -1,19 +1,19 @@
 <?php
     class Database 
     {
-        // private $conn;
-        // private $dbhost="localhost";
-        // private $user="root";
-        // private $password="";
-        // private $database="facturacion";
+        private $conn;
+        private $dbhost="localhost";
+        private $user="root";
+        private $password="";
+        private $database="facturacion";
 
         //:3306
 
-        private $conn;
-        private $dbhost="remotemysql.com";
-        private $user="dhtVYfspZy";
-        private $password="my4EkfYVQX";
-        private $database="dhtVYfspZy";
+        // private $conn;
+        // private $dbhost="remotemysql.com";
+        // private $user="dhtVYfspZy";
+        // private $password="my4EkfYVQX";
+        // private $database="dhtVYfspZy";
 
 
 
@@ -28,6 +28,19 @@
                 die("Fallo la conexion a la bas de datos".mysqli_connect_error().mysqli_connect_errorno());
             }
         }
+
+        public function ValidUser($usuario, $password) 
+        {
+            $sql = "SELECT * FROM Usuario WHERE nombre='$usuario' AND password='$password'";
+            $data = mysqli_query($this->conn,$sql);
+            $record = mysqli_fetch_object($data);
+            if ($record) {
+                return true;
+            } else {
+                return false;
+            }            
+        }
+
 
         public function read() 
         {
@@ -47,7 +60,6 @@
                 return false;
             }            
         }
-
 
         public function read_singlerecord($id) {
             $sql = "SELECT * FROM Clientes where id='$id'";
@@ -76,5 +88,7 @@
                 return false;
             }
         }
+
+
     }
 ?>

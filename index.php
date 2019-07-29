@@ -1,12 +1,21 @@
+<?php
+
+    // Validar Si ya hay Sesion
+    session_start();
+    if (!isset($_SESSION['logged_in_user_id'])) {
+        header('location: login.php');
+    }
+?>
+
 <!DOCTYPE html>
-<html>
+<html lang="es">
     <head>
         <meta charset="utf-8">
         <title>Listado de Clientes</title>
     </head>
 
     <body>
-        <h1>Listado de Clientes</h1>
+        <h1>Listado de Clientes </h1>
         <a href="Creacion.php">Adicionar Clientes</a>
         <br>
         <br>
@@ -56,5 +65,8 @@
             </tbody>
                 
         </table>
+        <br>
+        <br>
+        <footer>Usuario Conectado: <?php  echo $_SESSION['logged_in_user_name'].' - '.$_SESSION['logged_in_user_role'];?></footer>
     </body>
 </html>
