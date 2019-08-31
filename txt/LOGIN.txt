@@ -1,0 +1,68 @@
+-- EN database
+        public function ValidUser($usuario, $password) 
+        {
+            $sql = "SELECT * FROM Usuario WHERE nombre='$usuario' AND password='$password'";
+            $data = mysqli_query($this->conn,$sql);
+            $record = mysqli_fetch_object($data);
+            if ($record) {
+                return true;
+            } else {
+                return false;
+            }            
+        }
+
+
+
+
+
+-- AL INICIO DEL lOGGIN
+
+<?php 
+
+
+    $mensaje = "";
+    if (isset($_POST) && !empty($_POST)) {
+        
+        include('database.php');
+        $cliente = new Database();
+        $nombre = $_POST['usuario'];
+        $password = $_POST['password'];
+        $res = $cliente->ValidUser($nombre, $password);
+        
+        if($res){
+            
+            // Ir a Ventana Principal
+            header('location: index.php');
+        }
+        $mensaje = "Los Datos NO correponden a un Usuario Valido";
+    }
+?>
+
+
+-- para Borrar Sesion
+
+    // Inicalizar Objeto Sesion
+    session_start();
+
+    if (isset($_SESSION['logged_in_user_name'])) {
+        unset($_SESSION['logged_in_user_id']);
+        unset($_SESSION['logged_in_user_name']);
+        unset($_SESSION['logged_in_user_role']);
+    }    
+
+-- Par setear la Session
+
+        // initializar Variables de Sesion
+        $_SESSION['logged_in_user_id'] = session_id();
+        $_SESSION['logged_in_user_name'] = $nombre;
+        $_SESSION['logged_in_user_role'] = 'Administrador';
+
+
+
+-- Antes de Cada Pagina
+
+    // Validar Si ya hay Sesion
+    session_start();
+    if (!isset($_SESSION['logged_in_user_id'])) {
+        header('location: login.php');
+    }

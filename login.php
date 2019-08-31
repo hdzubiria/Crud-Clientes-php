@@ -22,6 +22,7 @@
             $_SESSION['logged_in_user_id'] = session_id();
             $_SESSION['logged_in_user_name'] = $nombre;
             $_SESSION['logged_in_user_role'] = 'Administrador';
+            
             // Ir aVentana Personal
             header('location: index.php');
         }
