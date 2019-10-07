@@ -1,4 +1,8 @@
 <?php
+
+    define("ROL_CLIENTE", "cliente", true);
+    define("ROL_ADMINISTRADOR", "administrador", true);
+
     return array(
         "host"      =>"localhost",
         "user"      =>"root",

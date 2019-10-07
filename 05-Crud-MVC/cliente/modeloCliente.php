@@ -54,6 +54,15 @@
             }
         }
 
+        public function FillPerms($rol) {
+            $perms = array(
+                "Create"=> ($rol == ROL_CLIENTE)? false:true,        
+                "ReadAll"=>  true,        
+                "Update"=> ($rol == ROL_CLIENTE)? false:true,        
+                "Delete"=> ($rol == ROL_CLIENTE)? false:true        
+            );
+            return $perms;
+        }
 
     }
 ?>

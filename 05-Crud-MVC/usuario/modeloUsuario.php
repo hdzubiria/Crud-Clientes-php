@@ -10,7 +10,7 @@
             $data = mysqli_query($this->conn,$sql);
             $record = mysqli_fetch_object($data);
             if ($record) {
-                return true;
+                return $record;
             }
             else {
                 return false;

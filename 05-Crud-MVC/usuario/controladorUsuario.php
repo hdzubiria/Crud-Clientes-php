@@ -14,16 +14,18 @@
 
         require_once("modeloUsuario.php");
         $modelo = new Usuario();
-        $res = $modelo->Validar_Usuario($usuario,$password);
+        $data = $modelo->Validar_Usuario($usuario,$password);
 
-        if ($res) {
+        if ($data) {
+
             // initializar Variables de Sesion
             $_SESSION['logged_in_user_id'] = session_id();
             $_SESSION['logged_in_user_name'] = $usuario;
-            $_SESSION['logged_in_user_role'] = 'Administrador';
+            $_SESSION['logged_in_user_role'] = $data->rol;
 
             // header('location: index.php');
             header('location:../cliente/controladorCliente.php?Accion=ReadAll');
+
 
         } else {
             $mensaje = "No fue Posible Conectarse, Revise los Datos!!";

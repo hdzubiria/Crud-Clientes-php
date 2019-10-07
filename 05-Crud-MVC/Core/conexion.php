@@ -9,7 +9,6 @@
         private $database;
         private $charset;
 
-
         function __construct() {
 
             $db_cfg = require_once '../config/database.php';
