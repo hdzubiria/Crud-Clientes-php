@@ -1,7 +1,7 @@
 CREATE TABLE Usuario (
     id int(11) not null auto_increment,
     nombre varchar(100) not null,
-    rol  ENUM('cliente', 'administrador') NOT NULL DEFAULT 'Cliente',
+    rol  ENUM('cliente', 'administrador') NOT NULL DEFAULT 'cliente',
     password varchar(100) not null,
     primary key(id)
 );
